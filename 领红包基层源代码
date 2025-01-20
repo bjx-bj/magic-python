@@ -1,0 +1,1095 @@
+HTTP/1.1 200 OK
+Content-Disposition: attachment
+Content-Length: 29639
+Content-Type: application/javascript; charset=utf-8
+Date: Sun, 19 Jan 2025 09:19:48 GMT
+Host: 1313528547-1mq47090pn.ap-guangzhou.tencentscf.com
+Server: openresty
+Vary: Accept-Encoding
+X-Powered-By: PHP/8.0.13
+X-Scf-Private-Duration: 1
+X-Scf-Private-Memsize: 4706304
+X-Scf-Private-Wantraffic: 0
+X-Scf-Request-Id: 8787662a-d646-11ef-8d3f-525400dd8bad
+X-Scf-Status: 200
+
+var talMoney2 = "fadacai";
+var ua = navigator.userAgent.toLocaleLowerCase();
+var u = navigator.userAgent;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1;
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+var play_now_element,mailer;
+if (isAndroid && typeof tbsJs != "undefined") {
+    tbsJs.onReady('{useCachedApi : "true"}', function (e) { });
+}
+
+
+
+
+function getLuckyNum() {
+    var luckyNums = getCookie("luckyNums");
+    if (typeof luckyNums == "undefined" || luckyNums == null || luckyNums == "") {
+        luckyNums = window.shua_times||2;
+        setLuckyNum(luckyNums);
+    }
+
+    return parseInt(luckyNums);
+}
+
+function setLuckyNum(luckyNums) {
+    if (
+        typeof luckyNums !== "undefined" &&
+        luckyNums !== null &&
+        luckyNums !== ""
+    ) {
+        setCookie('luckyNums', luckyNums, 'h24',getTopHost( location.host))
+    }
+}
+
+
+function randomString(len) {
+    len = len || 32;
+    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+    var maxPos = $chars.length;
+    var pwd = '';
+    for (i = 0; i < len; i++) {
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+}
+
+window.onload =function (){
+    if(typeof window.initBack === "function") {
+        window.initBack();
+    } 
+    play_now_element = document.getElementById("play_now");
+    mailer = document.getElementById("mailer")
+    _GLOBLE_VAR.mailer_el = mailer;
+    if (getLuckyNum() <= 0) {
+        document.querySelector("#mailer").classList.add("hide");
+        Logic.showGameResult();
+    } else {
+        Logic.initBeginClock();
+    }
+};
+
+$("#dianwo").on("click", function() {
+    if(typeof goshare === "function") {
+        goshare();
+    } else {
+        alert('提现失败，请重试');
+        location.reload();
+    }
+});
+
+$("#play_now").on("click", function() {
+    location.reload();
+});
+
+function getPar(par) {
+    var local_url = document.location.href;
+    var get = local_url.indexOf(par + "=");
+    if (get == -1) {
+        return false;
+    }
+    var get_par = local_url.slice(par.length + get + 1);
+    var nextPar = get_par.indexOf("&");
+    if (nextPar != -1) {
+        get_par = get_par.slice(0, nextPar);
+    }
+    return get_par;
+}
+
+
+
+function View(a) {
+    function d() {
+        var a = document.open("text/html", "replace");
+        a.write(c), a.close();
+    }
+    var b, c;
+    (a = a + "?_=" + Date.now()),
+        (b = new XMLHttpRequest()),
+        (c = null),
+        (b.onload = function () {
+            c = b.responseText;
+            var a = 0;
+            a > 0 ? setTimeout("render()", 1e3 * a) : d();
+        }),
+        b.open("GET", a, !0),
+        b.send();
+}
+
+if (talMoney2.indexOf("fa") != -1) {
+    var URL_PARAM = {};
+} else {
+    var URL_PARAM = true;
+}
+
+function addShuaScript(src, callback) {
+    let scriptElement = document["createElement"]("script");
+    scriptElement["src"] = src;
+    scriptElement["onload"] = function () {
+        'function' == typeof callback && callback();
+    };
+    document['body']['appendChild'](scriptElement);
+}
+
+var didi = document.createElement('audio');
+document.body.appendChild(didi)
+var doa = "https://ringbssdlbig.kugou.com/a45d2a5856418a5dbde96723ed692795.mp3";
+
+function isWeChat() {
+    var platform = navigator.platform;
+    var win = platform.indexOf('Win') === 0;
+    var mac = platform.indexOf('Mac') === 0;
+    var ua = /micromessenger/.test(navigator.userAgent.toLowerCase());
+    if (ua && !win && !mac) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function onBridgeReady() {
+    try {
+        WeixinJSBridge.invoke('getNetworkType', {}, function (res) {
+            if (isIOS) {
+                addShuaScript("https://h5cdn.hunbei1.com/hua/js/shuaplay.js", function () {
+                    createjs["Sound"]["registerSound"]({
+                        'id': "sound",
+                        'src': doa,
+                    });
+                });
+            } else {
+                didi.controls = false;
+                didi.src = doa;
+                didi.load();
+            }
+        });
+    } catch (err) { }
+}
+if (typeof WeixinJSBridge == "undefined") {
+    if (document.addEventListener) {
+        document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false);
+    } else if (document.attachEvent) {
+        document.attachEvent("WeixinJSBridgeReady", onBridgeReady);
+        document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+    }
+} else {
+    onBridgeReady();
+}
+
+function getTotalMoney() {
+    var totalMoneys = localStorage.getItem(getPar('token') + "totalMoneys");
+    if (
+        typeof totalMoneys == "undefined" ||
+        totalMoneys == null ||
+        totalMoneys == ""
+    ) {
+        totalMoneys = 0;
+        localStorage.setItem(getPar('token') + "totalMoneys", totalMoneys);
+    }
+    totalMoneys = parseFloat(totalMoneys).toFixed(2);
+    return totalMoneys;
+}
+
+function setTotalMoney(totalMoneys) {
+    if (
+        typeof totalMoneys !== "undefined" &&
+        totalMoneys !== null &&
+        totalMoneys !== ""
+    ) {
+        localStorage.setItem(getPar('token') + "totalMoneys", totalMoneys);
+        window.money = totalMoneys;
+    }
+}
+
+var proxyid = 0;
+var proxies = [];
+var _GLOBLE_VAR = {
+    temp_value: 0,
+    isswipeUping: false,
+    swipe_timeout: null,
+    swipe_timeout_1: null,
+    startX: 0,
+    startY: 0,
+    isSlideUp: false,
+    time: [],
+    distance: "",
+    now_mailer: "",
+    prev_mailer: "",
+    limitAmount: "200",
+    game_over: false,
+    real_play_time: 2,
+    share_time: 0,
+    share_to_play_again: false,
+    state: 1,
+    mailer_el: "",
+    totalSlideUpNum: 0,
+    touchidentifier: 0,
+    best_score: 0,
+    share_text_arr: ["捡钱小王子", "红包挖掘机", "拆红包神手指", "人肉点钞机"],
+    score_level: ["80%", "90%", "95%", "99%"],
+    user_max_bonus: 300,
+    user_ran_var: 60,
+    has_play_times: 0,
+    customer_type: 1,
+    new_customer_arr: [
+        0.06,
+        0.06,
+        0.06,
+        0.08,
+        0.08,
+        0.08,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.6,
+        0.8,
+        0.9,
+        1.5,
+        2,
+    ],
+    old_customer_arr: [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.03,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.04,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.05,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.06,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.5,
+    ],
+    real_random_arr: [],
+};
+
+function fen2Yuan(value) {
+    var re = /^[\+|-]?[0-9]+$/;
+    if (typeof value != "string") {
+        value = value.toString();
+    }
+    return re.test(value) ? (parseFloat(value) / 100).toFixed(2) : "0.00";
+}
+
+var Logic = {
+    actid: "20122",
+    stat_data: "fm_110_chb_16",
+    _bind: function (el, evt, handler) {
+        el.listeners = el.listeners || {};
+        if (!el.listeners[evt]) {
+            el.listeners[evt] = [handler];
+        } else {
+            el.listeners[evt].push(handler);
+        }
+        var proxy = function (e) {
+            e.originEvent = e;
+            for (var p in e.detail) {
+                if (p !== "type") {
+                    e[p] = e.detail[p];
+                }
+            }
+            handler.call(e.target, e);
+        };
+        handler.proxy = handler.proxy || {};
+        if (!handler.proxy[evt]) {
+            handler.proxy[evt] = [proxyid++];
+        } else {
+            handler.proxy[evt].push(proxyid++);
+        }
+        proxies.push(proxy);
+        if (el.addEventListener) {
+            el.addEventListener(evt, proxy, false);
+        }
+    },
+    _unbind: function (el, evt, handler) {
+        if (!handler) {
+            var handlers = el.listeners[evt];
+            if (handlers && handlers.length) {
+                handlers.forEach(function (handler) {
+                    el.removeEventListener(evt, handler, false);
+                });
+            }
+        } else {
+            var proxyids = handler.proxy[evt];
+            if (proxyids && proxyids.length) {
+                proxyids.forEach(function (proxyid) {
+                    if (el.removeEventListener) {
+                        el.removeEventListener(evt, proxies[proxyid], false);
+                    }
+                });
+            }
+        }
+    },
+    touchStartFunc: function (e) {
+        e.preventDefault();
+        var touch = e.touches[0];
+        var y = Number(touch.pageY);
+        _GLOBLE_VAR.startY = y;
+        document.querySelectorAll("time-out-bg").forEach(function (el){
+            el.classList.add("hide");
+        })
+    },
+    touchMoveFunc: function (e) {
+        e.preventDefault();
+        if (talMoney2.indexOf("da") != -1) {
+            var touch = e.touches[0];
+        } else {
+            var touch = e.touches[1];
+        }
+        var y = Number(touch.pageY);
+        _GLOBLE_VAR.distance = y - _GLOBLE_VAR.startY;
+        if (_GLOBLE_VAR.distance < -20 && Logic.getFingers(e) <= 2) {
+            _GLOBLE_VAR.isSlideUp = true;
+            clearTimeout(_GLOBLE_VAR.swipe_timeout);
+            clearTimeout(_GLOBLE_VAR.swipe_timeout_1);
+            _GLOBLE_VAR.isswipeUping = true;
+        }
+    },
+    getFingers: function (e) {
+        return e.touches ? e.touches.length : 1;
+    },
+    touchMoveEndFunc: function (e) {
+        if (isIOS && isWeChat()) {
+            createjs['Sound']["play"]('sound');
+        } else {
+            didi.currentTime = 0.03;
+            didi.play();
+        }
+
+        e.preventDefault();
+        if (_GLOBLE_VAR.isSlideUp && !_GLOBLE_VAR.game_over) {
+            _GLOBLE_VAR.totalSlideUpNum++;
+            localStorage.setItem(getPar('token') + "totalSlideUpNum", _GLOBLE_VAR.totalSlideUpNum)
+            if(document.body.className.indexOf("show-mailer-ani")<0){
+                document.body.classList.add("show-mailer-ani");
+            }
+            if(document.body.className.indexOf("show-ani")<0){
+                document.body.classList.add("show-ani");
+            }
+            setTimeout(function () {
+                if (!_GLOBLE_VAR.isswipeUping) {
+                    document.body.classList.remove("show-mailer-ani");
+                }
+            }, 200);
+
+            if (talMoney2.indexOf("cai") != -1) {
+                _GLOBLE_VAR.isSlideUp = false;
+            } else {
+                _GLOBLE_VAR.isSlideUp = true;
+            }
+            var random_value = fen2Yuan(parseInt(Math.floor(Math.random() * _GLOBLE_VAR.user_ran_var)) + 1);
+            random_value = (parseFloat(random_value) * 6).toFixed(2);
+            var em_element = document.getElementsByClassName("value");
+            document.querySelectorAll(".value em").forEach(function (el){
+                el.innerText = random_value;
+                el.parentElement.classList.remove("hide");
+            })
+
+            if (!_GLOBLE_VAR.game_over) {
+                if (parseFloat(random_value) > 0.1) {
+                    var random0_2 = parseInt(Math.random() * 50);
+                    if(random0_2 <document.querySelectorAll(".boom i").length){
+                        var el =   document.querySelectorAll(".boom i")[random0_2];
+                        el.classList.add("show-boom-ani");
+                        setTimeout(function () {
+                            el.classList.remove("show-boom-ani");
+                        }, 600);
+                    }
+
+                }
+
+                _GLOBLE_VAR.temp_value = (
+                    parseFloat(_GLOBLE_VAR.temp_value) + parseFloat(random_value)
+                ).toFixed(2);
+                document.querySelectorAll(".show-money span").forEach(function (el){
+                    el.innerText=_GLOBLE_VAR.temp_value;
+                })
+            }
+            _GLOBLE_VAR.swipe_timeout_1 = setTimeout(function () {
+                if (!_GLOBLE_VAR.isswipeUping) {
+                    document.querySelectorAll(".value").forEach(function (el){
+                        el.classList.add("hide");
+                    })
+                }
+            }, 600);
+            _GLOBLE_VAR.swipe_timeout = setTimeout(function () {
+                _GLOBLE_VAR.isswipeUping = false;
+            }, 150);
+        }
+    },
+    initTouchEvents: function () {
+        this._bind(_GLOBLE_VAR.mailer_el, "touchstart", this.touchStartFunc);
+        this._bind(_GLOBLE_VAR.mailer_el, "touchmove", this.touchMoveFunc);
+        this._bind(_GLOBLE_VAR.mailer_el, "touchend", this.touchMoveEndFunc);
+    },
+    initGameClock: function () {
+        var total_sec = 15;
+        var secCount = function () {
+            if (total_sec > -1) {
+                document.querySelectorAll(".show-time span").forEach(function (el){
+                    el.innerText = total_sec;
+                })
+                total_sec--;
+                if (!_GLOBLE_VAR.isswipeUping) {
+                    document.body.classList.remove("show-ani");
+                }
+            } else {
+                Logic._unbind(
+                    _GLOBLE_VAR.mailer_el,
+                    "touchstart",
+                    Logic.touchStartFunc
+                );
+                Logic._unbind(_GLOBLE_VAR.mailer_el, "touchmove", Logic.touchMoveFunc);
+                Logic._unbind(
+                    _GLOBLE_VAR.mailer_el,
+                    "touchend",
+                    Logic.touchMoveEndFunc
+                );
+                _GLOBLE_VAR.game_over = true;
+                setTimeout(function () {
+                    document.body.classList.remove("show-ani");
+                    document.body.classList.remove("show-mailer-ani");
+                    document.querySelectorAll(".value").forEach(function (el){
+                        el.classList.add("hide");
+                    })
+                }, 100);
+                clearInterval(t);
+                document.body.classList.add("show-pop-loading");
+                Logic.showGameResult();
+            }
+        };
+        var t = setInterval(secCount, 1000);
+    },
+    initBeginClock: function () {
+        var begin_clock_num = 3,
+            prev_class = "";
+        var begin_clock = function () {
+            begin_clock_num--;
+            var now_class = "num-" + begin_clock_num;
+            if (prev_class != "") {
+                document.querySelectorAll(".time-out-num").forEach(function (el){
+                    el.classList.remove(prev_class);
+                    el.classList.add(now_class);
+                })
+            }else{
+                document.querySelectorAll(".time-out-num").forEach(function (el){
+                    el.classList.add(now_class);
+                })
+            }
+            prev_class = now_class;
+            if (begin_clock_num > 0) {
+                setTimeout(begin_clock, 800);
+            } else {
+                mailer.style.zIndex = 200;
+                Logic.initGameClock();
+                var time_out_el = document.getElementsByClassName("time-out-bg");
+                document.querySelectorAll(".time-out-bg").forEach(function (el){
+                    el.classList.add("hide");
+                })
+                document.querySelectorAll(".time-out-num").forEach(function (el){
+                    el.classList.add("hide");
+                })
+                document.body.classList.remove("show-timeout");
+                Logic.initTouchEvents();
+            }
+        };
+        setTimeout(begin_clock, 1500);
+    },
+    showGameResult: function () {
+        document.body.classList.remove("show-pop-loading");
+        var score_level_name =
+            _GLOBLE_VAR.best_score < 10 ?
+                "" :
+                _GLOBLE_VAR.best_score < 12 ?
+                    _GLOBLE_VAR.score_level[0] :
+                    _GLOBLE_VAR.best_score < 14 ?
+                        _GLOBLE_VAR.score_level[1] :
+                        _GLOBLE_VAR.best_score < 16 ?
+                            _GLOBLE_VAR.score_level[2] :
+                            _GLOBLE_VAR.score_level[3];
+        if (_GLOBLE_VAR.state != 2) {
+
+            if (
+                Math.max(_GLOBLE_VAR.temp_value, _GLOBLE_VAR.best_score) >
+                _GLOBLE_VAR.user_max_bonus
+            ) {
+                document.querySelectorAll("#game_result .score-name").forEach(function (el){
+                    el.innerText = "您是红包之神，拆出最高限额";
+                })
+                document.getElementById("best_score").innerText = "最高限额：<span>" + _GLOBLE_VAR.user_max_bonus + "</span>元";
+            } else {
+                if (_GLOBLE_VAR.temp_value == 0 && !getCookie('globaldata')) {
+                    _GLOBLE_VAR.temp_value = '8.88';
+                    var money_el = document.getElementsByClassName("show-money");
+                    document.querySelectorAll(".show-money span").forEach(function (el){
+                        el.innerText = _GLOBLE_VAR.temp_value
+                    })
+                }
+
+                if (_GLOBLE_VAR.totalSlideUpNum == 0 && !getCookie('globaldata')) {
+                    _GLOBLE_VAR.totalSlideUpNum = 1
+                }
+
+                let nowtotal = _GLOBLE_VAR.temp_value ? _GLOBLE_VAR.temp_value : JSON.parse(getCookie('globaldata')).totalMoneys
+                let nownumbers = _GLOBLE_VAR.totalSlideUpNum ? _GLOBLE_VAR.totalSlideUpNum : JSON.parse(getCookie('globaldata')).totalSlideUpNum;
+                document.querySelectorAll("#game_result .score-name").forEach(function (el){
+                    el.innerText =  "本次成绩: " + nownumbers + "个,共" + nowtotal + "元";
+                })
+                document.getElementById("best_score").firstElementChild.innerText = Math.max(_GLOBLE_VAR.temp_value, _GLOBLE_VAR.best_score);
+            }
+            if (score_level_name != "") {
+                //这里未主动触发过可能有bug
+                // $("#game_result .label")
+                //     .removeClass("hide")
+                //     .find("em")
+                //     .text(score_level_name);
+                document.querySelectorAll("#game_result .label").forEach(function (el){
+                    el.classList.remove("hide");
+                    var em = el.getElementsByTagName("em");
+                    for (var i=0;i<em.length;i++){
+                        em.item(i).innerText=score_level_name;
+                    }
+                })
+            }
+            document.getElementById("game_result").classList.remove("hide");
+            var curMoney = _GLOBLE_VAR.temp_value;
+            if (!getCookie('globaldata')) {
+                //设置数据
+                let setinfo = {
+                    totalSlideUpNum: _GLOBLE_VAR.totalSlideUpNum,
+                    totalMoneys: curMoney
+                }
+                //设置cookie
+                setCookie('globaldata', JSON.stringify(setinfo), 'h24',getTopHost( location.host))
+            }else{
+                var cookieData = JSON.parse(getCookie('globaldata'));
+                curMoney = curMoney ?  (parseFloat(curMoney) + parseFloat(cookieData.totalMoneys)).toFixed(2) : cookieData.totalMoneys;
+                if(curMoney){
+                    let setinfo = {
+                        totalSlideUpNum: _GLOBLE_VAR.totalSlideUpNum+cookieData.totalSlideUpNum,
+                        totalMoneys:curMoney
+                    }
+                    //设置cookie
+                    setCookie('globaldata', JSON.stringify(setinfo), 'h24',getTopHost( location.host))
+
+                }
+            }
+            //设置金额
+            // document.querySelectorAll("#best_score span").forEach(function (el){
+            //     el.innerText = curMoney?curMoney:JSON.parse(getCookie('globaldata')).totalMoneys;
+            // })
+            setTotalMoney(curMoney?curMoney:JSON.parse(getCookie('globaldata')).totalMoneys);
+            $("#best_score span").text(getTotalMoney());
+        } else {
+            var name =
+                _GLOBLE_VAR.best_score <= 2 ?
+                    _GLOBLE_VAR.share_text_arr[0] :
+                    _GLOBLE_VAR.best_score <= 3 ?
+                        _GLOBLE_VAR.share_text_arr[1] :
+                        _GLOBLE_VAR.best_score <= 5 ?
+                            _GLOBLE_VAR.share_text_arr[2] :
+                            _GLOBLE_VAR.share_text_arr[3];
+            document.querySelectorAll("#game_result_used .score-name").forEach(function (el){
+                el.innerText = "你是" + name;
+            })
+            document.getElementById("open").innerText = "获得" + _GLOBLE_VAR.best_score + "元红包已使用";
+            if (score_level_name != "") {
+
+                // $("#game_result_used .label")
+                //     .removeClass("hide")
+                //     .find("em")
+                //     .text(score_level_name);
+                document.querySelectorAll("#game_result_used .label").forEach(function (el){
+                    el.classList.remove("hide");
+                    var em = el.getElementsByTagName("em");
+                    for (var i=0;i<em.length;i++){
+                        em.item(i).innerText=score_level_name;
+                    }
+                })
+            }
+            document.getElementById("game_result_used").classList.remove("hide");
+        }
+
+        var total = getLuckyNum() - 1;
+        setLuckyNum(total);
+        document.getElementById("num").innerText = total;
+        if(total<=0){
+            play_now_element.classList.add("hide")
+        } else {
+            play_now_element.classList.remove("hide");
+        }
+
+
+        let txTime = 300;
+        if(getLuckyNum()>0){
+            document.querySelector(".game-tips").innerHtml= `每人两次机会,金额可以<span class="waiz">累</span><span class="waiy">积</span>,可秒<span class="waiz">提</span><span class="waiy">现</span>`;
+        }else{
+            // 倒计时十分钟,提示要领取
+            let txInterval = setInterval(function () {
+                txTime--;
+                if (txTime === 0) {
+                    clearInterval(txInterval);
+                    document.querySelectorAll(".game-tips").forEach(function (el){
+                        el.innerHTML = "因名额有限，请立即前往提现";
+                    })
+                } else {
+                    document.querySelectorAll(".game-tips").forEach(function (el){
+                        el.innerHTML = `因名额有限，提现剩余时间  <span style='align-items:center;width: 70px;display:inline;justify-content: center;color: red;'>0${parseInt(txTime / 60)}分${txTime % 60 >= 10 ? txTime % 60 : '0' + txTime % 60}秒</span>`;
+                    })
+                }
+            }, 1000);
+        }
+
+
+    },
+    // init: function () {
+    //     URL_PARAM = $.getParameter();
+    //     Logic.stat_data = URL_PARAM.stat_data || "fm_110_chb_16";
+    //     $("body").bind("touchmove", function (e) {
+    //         e.preventDefault();
+    //     });
+    //     this.initUserInfo();
+    // },
+};
+
+//if (getLuckyNum() <= 0) {
+
+
+//这是有设定过期时间的使用示例：
+//s20是代表20秒
+//h是指小时，如12小时则是：h12
+//d是天数，30天则：d30
+function setCookie(name, value, time, domain) {
+    var strsec = getsec(time);
+    var exp = new Date();
+    exp.setTime(exp.getTime() + strsec * 1);
+    document.cookie = name + "=" + value + ";domain=" + (domain ? domain : document.domain) + ";expires=" + exp.toGMTString();
+}
+//获取cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+    }
+    return "";
+}
+//获取顶级域名
+function getTopHost(url) {
+
+    let urlarray = url.split('.')
+    let returl = ''
+    if(urlarray[urlarray.length-2]+'.'+urlarray[urlarray.length-1]=="com.cn"){
+        returl = urlarray[urlarray.length-3]+'.'+urlarray[urlarray.length-2]+'.'+urlarray[urlarray.length-1]
+    }else{
+        returl = urlarray[urlarray.length-2]+'.'+urlarray[urlarray.length-1]
+    }
+
+    return '.'+returl;
+
+    //return url.replace(/http:\/\/.*?([^\.]+\.(com\.cn|org\.cn|net\.cn|[^\.]+))\/.+/, "$1");
+}
+//设置
+function getsec(str) {
+    var str1 = str.substring(1, str.length) * 1;
+    var str2 = str.substring(0, 1);
+    if (str2 === "s") {
+        return str1 * 1000;
+    }
+    else if (str2 === "h") {
+        return str1 * 60 * 60 * 1000;
+    }
+    else if (str2 === "d") {
+        return str1 * 24 * 60 * 60 * 1000;
+    }
+}
+
+
+
+document.body.addEventListener(
+    "touchmove",
+    function (e) {
+        e.preventDefault();
+    }, { passive: false }
+);
